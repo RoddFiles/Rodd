@@ -1,0 +1,926 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<HTML lang="id" xmlns="http://www.w3.org/1999/xhtml">
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="Content-Type" content="text/html;"/>
+<meta http-equiv="Content-Script-Type" content="text/javascript"/>
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta content="text/html" charset="utf-8"/>
+<meta name="theme-color" content="#ffffff"/> 
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover"/>
+<meta name="HandheldFriendly" content="True" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<meta name="apple-mobile-web-app-capable" 
+content="yes"/>
+<meta name="apple-touch-fullscreen" content="yes"/>
+<meta name="mobile-web-app-capable" content="yes"/> 
+<meta name="keywords" content=""/>
+<meta property="description" content=""/>
+<meta property="og:description" content=""/>
+<meta property="og:title" content="Rodd Volume"/>
+
+<!-- LOGO -->
+<meta property="og:image" content=""/><!-- input link logo -->
+<link rel="shortcut icon" href=""/><!-- input link logo -->
+
+
+<!-- JUDUL KONTEN -->
+<TITLE>REEDBOOK</TITLE>
+
+<style>
+
+* {
+flex: 1;
+flex-box: 1;
+-webkit-flex-box: 1;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+/*Android*/
+-webkit-user-select: none;
+-webkit-touch-callout: none;
+/* iOS */
+-webkit-user-select: none;
+/* Safari */
+user-select: none;
+/* Chrome */
+-webkit-tap-highlight-color: transparent;
+-webkit-text-size-adjust: none;
+-moz-text-size-adjust: none;
+-ms-text-size-adjust: none;
+text-size-adjust: none;
+overflow: auto;
+}
+
+body {
+margin: 0;
+padding: 0;
+width: 100%;
+height: 100%;
+font-family: Arial, Roboto;
+background: #ddd;
+}
+
+/* DARK MODE */
+
+body.female,
+body.female .navbar,
+body.female .bottombox,
+body.female .sidebarlist {
+background: #222;
+color: #777;
+}
+
+body.female .navbar svg,
+body.female .navbar span,
+body.female .pages svg,
+body.female .bottombox svg,
+body.female p,
+body.female pre {
+fill: #777;
+color: #777;
+}
+
+body.female .navbar {
+box-shadow: 0 1px 1px rgba(0,0,0,0.35);
+}
+
+body.female .bottombox {
+box-shadow: 0 0 1px 1px rgba(0,0,0,0.35);
+}
+
+body.female h1,
+body.female a,
+body.female #judul {
+color: #aaa;
+}
+
+body.female .source span {
+background: #aaa;
+color: #222;
+}
+
+body.female #cari {
+stroke: #777;
+}
+
+body.female .konten {
+border-bottom: 5px solid rgba(0,0,0,0.085);
+}
+
+body.female .kategori {
+border-bottom: 1px solid rgba(0,0,0,0.085);
+}
+
+body.female .notif,
+body.female .konten a {
+background: darkred;
+color: #ccc;
+}
+
+body.female .notif h1,
+body.female .notif a {
+color: #ccc;
+}
+
+body.female #tags {
+color: #68CF00;
+}
+
+body.female .pages a {
+border: 1px solid #777;
+}
+
+body.female .listcontent {
+box-shadow: 0 0 10px 0 rgba(0,0,0,0.1), inset 0 0 1px #aaa;
+background: #222;
+color: #777;
+}
+
+body.female .sidebarlist {
+border-top: 1px solid #333;
+}
+
+/***/
+
+#navbar {
+/*transition: top 0.1s linear;*/
+position: fixed;
+top: 0;
+}
+
+.navbar {
+background: #fafafa;
+text-align: left;
+width: 100%;
+height: 50px;
+min-height: 50px;
+margin: 0;
+z-index: 10;
+padding: 2px 15px;
+box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+overflow: hidden;
+}
+
+a {
+text-decoration: none;
+cursor: pointer;
+}
+
+.navbar a {
+position: fixed;
+top: 5px;
+right: 10px;
+width: 40px;
+height: 40px;
+display: inline-block;
+overflow: hidden;
+padding: 6.5px;
+}
+
+.navbar svg {
+width: 25px;
+height: 25px;
+color: #222;
+fill: #222;
+cursor: pointer;
+}
+
+.navbar a:active {
+border-radius: 4px;
+background: rgba(0,0,0,0.025);
+}
+
+.navbar span {
+color: #111;
+font-size: 20px;
+display: inline-block;
+width: auto;
+height: 100%;
+padding: 10px 0;
+float: left;
+cursor: pointer;
+font-weight: 450;
+text-shadow: 0 0 1px rgba(0,0,0,0.1)
+}
+
+.navbar span b {
+color: red;
+}
+
+/***/
+
+#navbottom {
+transition: bottom 0.1s linear;
+position: fixed;
+bottom: 0;
+}
+
+.bottombox {
+background: #fafafa;
+z-index: 10;
+height: 50px;
+width: 100%;
+margin: 0;
+padding: 7.5px;
+text-align: left;
+overflow: hidden;
+box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
+}
+
+.menubox {
+height: 100%;
+width: 100%;
+overflow: hidden;
+padding: 0;
+margin: 0;
+}
+
+.menubox .tulis {
+width: 60%;
+height: 100%;
+padding: 7.5px;
+background: #00911A;
+color: #fff;
+text-align: center;
+font-size: 17px;
+font-weight: 450;
+display: inline-block;
+border-radius: 4px;
+cursor: pointer;
+overflow: hidden;
+}
+
+.tulis span {
+display: inline-block;
+width: auto;
+height: auto;
+}
+
+.tulis svg {
+margin-right: 10px;
+width: 20px;
+height: 20px;
+color: #fff;
+fill: #fff;
+cursor: pointer;
+}
+
+.menubox .option {
+width: 18.5%;
+height: 100%;
+text-align: center;
+padding: 7.5px;
+background: rgba(0,0,0,0.1);
+display: inline-block;
+border-radius: 4px;
+cursor: pointer;
+overflow: hidden;
+}
+
+.option svg {
+width: 20px;
+height: 20px;
+color: #333;
+fill: #333;
+cursor: pointer;
+}
+
+.menubox a:active {
+opacity: 0.75;
+}
+
+.contentbox {
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+-webkit-box-flex: 1;
+box-flex: 1;
+flex: 1;
+padding-top: 50px;
+margin: 0;
+overflow: auto;
+overflow-y: scroll;
+}
+
+
+.sliderlist {
+width: 100%;
+height: auto;
+padding: 5px;
+overflow-x: scroll;
+overflow-y: hidden;
+white-space: nowrap;
+}
+
+.sliderlist a {
+background: #fff;
+display: inline-block;
+cursor: pointer;
+overflow: hidden;
+text-align: center;
+padding: 5px;
+border-radius: 10px;
+min-width: 200px;
+width: 200px;
+height: auto;
+}
+
+.sliderlist a:active {
+opacity: 0.75;
+}
+
+.sliderlist img {
+width: 100%;
+height: auto;
+border-radius: 8px 8px 2px 2px;
+overflow: hidden;
+}
+
+.sliderlist a span {
+display: block;
+width: 100%;
+height: 30px;
+padding: 5px;
+text-align: center;
+font-size: 15px;
+font-weight: bold;
+color: #333;
+}
+
+
+
+.header {
+background: #fff;
+width: 100%;
+height: auto;
+overflow: hidden;
+}
+
+.header img {
+width: 100%;
+height: auto;
+margin: 0;
+}
+
+.header .menulist {
+width: 100%;
+height: 50px;
+padding: 5px;
+margin: 0;
+overflow-x: scroll;
+overflow-y: hidden;
+white-space: nowrap;
+}
+
+.menulist #cerita {
+border: 1px solid #0088FF;
+color: #0088FF;
+}
+
+.menulist a {
+display: inline-block;
+border: 1px solid #ccc;
+border-radius: 10px;
+color: #333;
+width: auto;
+height: 30px;
+font-size: 15px;
+font-weight: bold;
+padding: 5px 15px;
+}
+
+.menulist a:active {
+opacity: 0.75;
+}
+
+.box {
+background: #fff;
+width: 100%;
+heigth: auto;
+padding: 10px;
+margin: 5px 0;
+}
+
+.box a {
+display: block;
+cursor: pointer;
+width: 100%;
+heigth: auto;
+padding: 5px;
+font-size: 15px;
+color: #0066ff;
+}
+
+.box h1 {
+font-size: 15px;
+color: #222;
+}
+
+.box p {
+font-size: 13px;
+color: #666;
+}
+
+.box .next {
+border-top: 1px solid #ccc;
+margin-top: 10px;
+text-align: center;
+color: #aaa;
+}
+
+.box #option {
+display: inline-block;
+cursor: pointer;
+text-align: center;
+width: 49%;
+height: auto;
+font-weight: 450;
+color: #333;
+border: 1px solid #ccc;
+border-radius: 10px;
+}
+
+.box a:active {
+opacity: 0.75;
+}
+
+/* LANDSCAPE */
+@media only screen and (orientation:landscape) {
+.bottombox { 
+
+}
+
+.sidebar .sidebarlist {
+position: absolute;
+bottom: 0;
+left: 0;
+height: 70%;
+width: 100%;
+}
+
+.sidebar .closebtn {
+position: absolute;
+top: 0;
+left: 0;
+height: 30%;
+width: 100%;
+}
+
+}
+
+/* PRINT PAGE (PDF) */
+@media print {
+body {
+display: none;
+}}
+
+/* TABLOID SIZE */
+@page {
+size: 11in 17in; 
+}
+
+scrollbar, 
+::-webkit-scrollbar {
+display: none;
+}
+</style>
+<STYLE type="text/css">
+
+noscript {
+background: #f7f7f7;
+display: block;
+color: #000;
+width: 100%;
+height: 100%;
+min-height: 600px;
+z-index: 900;
+}
+
+#loading {
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+position: fixed;
+top: 0;
+}
+
+.load {
+background: #fff;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%,-50%);
+border: .5px solid #eee;
+border-radius: 4px;
+margin: 0;
+padding: 0;
+text-align: center;
+width: 300px;
+height: auto;
+}
+
+.load h1 {
+text-align: center;
+color: #111;
+font-size: 35px;
+}
+
+.load a {
+display: inline-block;
+width: 200px;
+height: auto;
+padding: 5px 15px;
+margin: 10px 0;
+border-radius: 20px;
+font-size: 20px;
+font-weight: bold;
+background: linear-gradient(to right, #4facfe, #FF92C5);
+box-shadow: 0 4px 4px rgba(0,0,0,0.1);
+color: #fff;
+}
+
+.load a:active {
+transform: scale(0.95);
+}
+
+.load b {
+color: red;
+}
+
+#signal {
+background: rgba(0,0,0,0.5);
+width: 100%;
+height: auto;
+position: fixed;
+top: 50px;
+display: none;
+color: #fff;
+font-size: 10px;
+padding: 2px 5px;
+z-index: 11;
+text-align: center;
+}
+</STYLE>
+<style>
+
+/* SIDEBAR */
+
+.sidebar {
+position: fixed;
+bottom: 0;
+left: 0;
+height: 100%;
+width: 100%;
+z-index: 900;
+overflow: hidden;
+transform: translateY(100%);
+transition: 0.35s;
+}
+
+.sidebarlist {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 80%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  border-radius: 4px 4px 0 0;
+  border-top: 1px solid #eaeaea;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 600px 4px rgba(0,0,0,0.25);
+}
+
+.sidebarlist h1 {
+color: #222;
+margin: 0 10px;
+margin-bottom: 15px;
+padding: 10px 0;
+font-size: 25px;
+text-align: center;
+font-weight: 450;
+border-bottom: 1px solid #ddd;
+}
+
+.sidebarlist .opsi {
+color: #444;
+font-size: 12px;
+text-align: left;
+margin: 10px;
+display: block;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 20%;
+  width: 100%;
+  background: transparent;
+  display: block;
+  cursor: pointer;
+}
+
+iframe {
+padding: 0;
+margin: 0;
+width: 100%;
+height: 100%;
+cursor: pointer;
+border: none;
+display: block !important;
+}
+</style>
+</HEAD>
+<BODY onoffline="nosignal()" ononline="signalok()" oncontextmenu="return false">
+
+
+<span id="signal">Tidak ada jaringan internet.</span>
+
+
+
+<noscript id="loading">
+
+<div class="load">
+
+<h1>Rodd<b>Files</b></h1>
+
+<a href="?">MASUK</a>
+
+</div>
+
+<p style="padding: 5px; font-size: 12px;"><b>Note :</b> Aktifkan <b>javascript</b> pada browser anda untuk dapat membuka RoddFiles lalu tekan <b>MASUK</b> terima kasih.</p>
+</div>
+</noscript>
+
+
+
+
+
+
+
+<div class="navbar" id="navbar">
+
+
+
+<a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g data-name="Layer 2"><g data-name="search"><rect width="24" height="24" opacity="0"/><path d="M20.71 19.29l-3.4-3.39A7.92 7.92 0 0 0 19 11a8 8 0 1 0-8 8 7.92 7.92 0 0 0 4.9-1.69l3.39 3.4a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 11a6 6 0 1 1 6 6 6 6 0 0 1-6-6z"/></g></g></svg></a>
+
+
+<span>Rodd<b>Files</b></span>
+
+</div>
+
+
+<div class="contentbox">
+
+
+<div class="header">
+<img src="https://z-m-scontent.fcgk3-1.fna.fbcdn.net/v/t1.0-9/fr/cp0/e15/q65/140544913_2819444178271337_6756162103385651309_o.jpg?_nc_cat=104&ccb=2&_nc_sid=85a577&efg=eyJpIjoidCJ9&_nc_eui2=AeEA86mBKmO1-vtglU_ap1kUifqRTUoK5F2J-pFNSgrkXU_ZW-GzeGT-UvCjpPEPc_LHwfxQhs1ytWAwHgTX5nh3&_nc_ohc=jmmcGUzRAmgAX9oSPe-&_nc_ad=z-m&_nc_cid=1101&_nc_eh=1aed3a482b72555631c623a7b380c750&_nc_rml=0&_nc_ht=z-m-scontent.fcgk3-1.fna&tp=14&oh=4ae8035586a63bc070fb7104b382e1b7&oe=603D1DA4"/>
+
+<div class="menulist">
+<a href="#" id="cerita">Terbaru</a>
+<a href="#">Foto</a>
+<a href="#">Video</a>
+<a href="#">Permainan</a>
+<a href="#">Aplikasi</a>
+<a href="#">Musik</a>
+<a href="#">Script</a>
+<a href="#">E-Book</a>
+<a href="#">X-Files</a>
+<a href="#">Lainnya</a>
+</div>
+</div>
+
+
+<div class="box">
+
+<h1>Tentang</h1>
+
+<p>Rodd Files adalah kumpulan data-data beragam ekstensi yang disimpan didalam website dan dapat diunduh kembali oleh pemilik atau pengunjung website.</p>
+
+<h1>Owner &amp; Author</h1>
+
+<a href="#">Rodd</a>
+
+<a class="next" href="#">Lihat profil &#10095; </a>
+
+</div>
+
+
+
+
+
+
+
+<div class="sliderlist">
+
+<a href="#">
+
+<img src="https://z-m-scontent.fcgk3-1.fna.fbcdn.net/v/t1.0-9/fr/cp0/e15/q65/125867626_214376663392939_377959756076950135_n.jpg?_nc_cat=109&ccb=2&_nc_sid=8024bb&efg=eyJpIjoidCJ9&_nc_eui2=AeF-B1EBnzjlLq6aIACAm_tIp2BmS7l3knKnYGZLuXeScjK-jarOxJWsdGrrv3uUmk6lM6e0t8fc2s3ScUr6eE0B&_nc_ohc=eZ2kIeL5J1wAX9pDdTK&_nc_ad=z-m&_nc_cid=1101&_nc_eh=1aed3a482b72555631c623a7b380c750&_nc_rml=0&_nc_ht=z-m-scontent.fcgk3-1.fna&tp=14&oh=02bc22679f530d0ede1eedc088e7fe98&oe=6039CE58"/>
+
+<span>Facebook</span>
+
+</a><!-- Limiter -->
+
+
+
+<a href="#">
+
+<img src="https://z-m-scontent.fcgk3-1.fna.fbcdn.net/v/t1.0-9/fr/cp0/e15/q65/125867626_214376663392939_377959756076950135_n.jpg?_nc_cat=109&ccb=2&_nc_sid=8024bb&efg=eyJpIjoidCJ9&_nc_eui2=AeF-B1EBnzjlLq6aIACAm_tIp2BmS7l3knKnYGZLuXeScjK-jarOxJWsdGrrv3uUmk6lM6e0t8fc2s3ScUr6eE0B&_nc_ohc=eZ2kIeL5J1wAX9pDdTK&_nc_ad=z-m&_nc_cid=1101&_nc_eh=1aed3a482b72555631c623a7b380c750&_nc_rml=0&_nc_ht=z-m-scontent.fcgk3-1.fna&tp=14&oh=02bc22679f530d0ede1eedc088e7fe98&oe=6039CE58"/>
+
+<span>Instagram</span>
+
+</a><!-- Limiter -->
+
+
+
+<a href="#">
+
+<img src="https://z-m-scontent.fcgk3-1.fna.fbcdn.net/v/t1.0-9/fr/cp0/e15/q65/125867626_214376663392939_377959756076950135_n.jpg?_nc_cat=109&ccb=2&_nc_sid=8024bb&efg=eyJpIjoidCJ9&_nc_eui2=AeF-B1EBnzjlLq6aIACAm_tIp2BmS7l3knKnYGZLuXeScjK-jarOxJWsdGrrv3uUmk6lM6e0t8fc2s3ScUr6eE0B&_nc_ohc=eZ2kIeL5J1wAX9pDdTK&_nc_ad=z-m&_nc_cid=1101&_nc_eh=1aed3a482b72555631c623a7b380c750&_nc_rml=0&_nc_ht=z-m-scontent.fcgk3-1.fna&tp=14&oh=02bc22679f530d0ede1eedc088e7fe98&oe=6039CE58"/>
+
+<span>Twitter</span>
+
+</a><!-- Limiter -->
+	
+<a href="#">
+
+<img src="https://z-m-scontent.fcgk3-1.fna.fbcdn.net/v/t1.0-9/fr/cp0/e15/q65/125867626_214376663392939_377959756076950135_n.jpg?_nc_cat=109&ccb=2&_nc_sid=8024bb&efg=eyJpIjoidCJ9&_nc_eui2=AeF-B1EBnzjlLq6aIACAm_tIp2BmS7l3knKnYGZLuXeScjK-jarOxJWsdGrrv3uUmk6lM6e0t8fc2s3ScUr6eE0B&_nc_ohc=eZ2kIeL5J1wAX9pDdTK&_nc_ad=z-m&_nc_cid=1101&_nc_eh=1aed3a482b72555631c623a7b380c750&_nc_rml=0&_nc_ht=z-m-scontent.fcgk3-1.fna&tp=14&oh=02bc22679f530d0ede1eedc088e7fe98&oe=6039CE58"/>
+
+<span>Youtube</span>
+
+</a><!-- Limiter -->
+	
+
+</div>
+
+
+
+
+
+
+
+<div class="box">
+
+<h1>Profil</h1>
+
+<p>Rodd Card adalah kumpulan data-data beragam ekstensi yang disimpan didalam website dan dapat diunduh kembali oleh pemilik atau pengunjung website.</p>
+
+<a id="option" onclick="navigator.share({url: 'https://roddfiles.com'})">Bagikan</a>
+<a id="option" href="#" download>Download</a>
+
+
+</div>
+
+
+<div class="box">
+
+<h1>Profil</h1>
+
+<p>Rodd Card adalah kumpulan data-data beragam ekstensi yang disimpan didalam website dan dapat diunduh kembali oleh pemilik atau pengunjung website.</p>
+
+<a id="option" onclick="navigator.share({url: 'https://roddfiles.com'})">Bagikan</a>
+<a id="option" href="#" download>Download</a>
+
+
+</div>
+
+
+<div class="box">
+
+<h1>Profil</h1>
+
+<p>Rodd Card adalah kumpulan data-data beragam ekstensi yang disimpan didalam website dan dapat diunduh kembali oleh pemilik atau pengunjung website.</p>
+
+<a id="option" onclick="navigator.share({url: 'https://roddfiles.com'})">Bagikan</a>
+<a id="option" href="#" download>Download</a>
+
+</div>
+
+
+
+<div class="box">
+
+<h1>Profil</h1>
+
+<p>Rodd Card adalah kumpulan data-data beragam ekstensi yang disimpan didalam website dan dapat diunduh kembali oleh pemilik atau pengunjung website.</p>
+
+<a id="option" onclick="navigator.share({url: 'https://roddfiles.com'})">Bagikan</a>
+<a id="option" href="#" download>Download</a>
+
+</div>
+
+
+
+<div class="box">
+
+<h1>Profil</h1>
+
+<p>Rodd Card adalah kumpulan data-data beragam ekstensi yang disimpan didalam website dan dapat diunduh kembali oleh pemilik atau pengunjung website.</p>
+
+<a id="option" onclick="navigator.share({url: 'https://roddfiles.com'})">Bagikan</a>
+<a id="option" href="#" download>Download</a>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+<div class="bottombox" id="navbottom">
+<div class="menubox" oncontextmenu="openNav()">
+
+<a class="tulis" href="https://api.whatsapp.com/send?&phone=6283857264569"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="whatsapp" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"></path></svg><span>WhatsApp</span></a>
+
+<a class="option" href="mailto:roddfiles@live.com?subject=RoddFiles - Kirim File&body=Lampirkan file disini..."><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 471.2 471.2" style="enable-background:new 0 0 471.2 471.2;" xml:space="preserve"><path d="M457.7,230.15c-7.5,0-13.5,6-13.5,13.5v122.8c0,33.4-27.2,60.5-60.5,60.5H87.5c-33.4,0-60.5-27.2-60.5-60.5v-124.8
+			c0-7.5-6-13.5-13.5-13.5s-13.5,6-13.5,13.5v124.8c0,48.3,39.3,87.5,87.5,87.5h296.2c48.3,0,87.5-39.3,87.5-87.5v-122.8
+			C471.2,236.25,465.2,230.15,457.7,230.15z"/><path d="M159.3,126.15l62.8-62.8v273.9c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5V63.35l62.8,62.8c2.6,2.6,6.1,4,9.5,4
+			c3.5,0,6.9-1.3,9.5-4c5.3-5.3,5.3-13.8,0-19.1l-85.8-85.8c-2.5-2.5-6-4-9.5-4c-3.6,0-7,1.4-9.5,4l-85.8,85.8
+			c-5.3,5.3-5.3,13.8,0,19.1C145.5,131.35,154.1,131.35,159.3,126.15z"/></svg></a>
+
+<a class="option" onclick="openNav()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g data-name="Layer 2"><g data-name="more-horizotnal"><rect width="24" height="24" opacity="0"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="5" cy="12" r="2"/></g></g></svg></a>
+
+
+
+</div><!-- MENUBOX -->
+</div><!-- BOTTOMBOX -->
+
+
+<div id="sidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"></a>
+  <div class="sidebarlist">
+<iframe src="https://facebook.com/roddpage" allowfullscreen="true" aria-hidden="true" frameborder="0" allowtransparency="true" scrolling="no" allow="encrypted-media">Browser kamu tidak mendukung tindakan ini.</iframe>
+  </div>
+</div>
+
+
+<span id="theme"></span>
+
+
+
+<script>
+function openNav() {
+  document.getElementById("sidebar").style.transform = "translateY(0)"
+}
+
+function closeNav() {
+  document.getElementById("sidebar").style.transform = "translateY(100%)"
+}
+</script> 
+<script>
+function signalok() {
+document.getElementById('signal').style.display = "none";
+}
+
+function nosignal() {
+document.getElementById('signal').style.display = "block";
+}
+</script>
+<script>
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+var currentScrollPos = window.pageYOffset;
+  if (prevScrollpos > currentScrollPos) {
+    document.getElementById("navbar").style.top = "0";
+    document.getElementById("navbottom").style.bottom = "0";
+  } else {
+    document.getElementById("navbar").style.top = "0";
+    document.getElementById("navbottom").style.bottom = "-50px";
+  }
+  prevScrollpos = currentScrollPos;
+}
+</script>
+<SCRIPT type="text/javascript">
+$(document).ready(function(){
+    alert('Roddfiles, Apache 2.0 Licensed.');
+    document.write('Roddfiles, Apache 2.0 Licensed.');});
+</SCRIPT>
+<SCRIPT type="text/javascript">
+// SWITCH MODE
+const themeButton = document.querySelector('#theme');
+
+themeButton.addEventListener('click', () => {
+    document.body.classList.toggle('female');
+    localStorage.setItem('theme', document.body.classList.contains('female') ? 'female' : 'light');
+});
+
+if (localStorage.getItem('theme') === 'female') {
+    document.body.classList.add('female');
+}
+</SCRIPT>
+</body>
+</html>
